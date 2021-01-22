@@ -1,0 +1,23 @@
+@import url("style-common.css");
+
+.fg-x700 {
+	width: 700px;
+}
+
+.fg-x400 {
+	width: 400px;
+}
+
+.user-frm {
+	padding: 60px 0;
+	border-bottom: 1px solid #DDDDDD;
+	min-height: 500px;
+}
+
+.login-frm-btn {
+	width: 183px;
+	height: 45px;
+	border: none;
+	outline: none;
+	border-radius: 10px;
+}

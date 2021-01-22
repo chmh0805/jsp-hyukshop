@@ -1,0 +1,47 @@
+@import url("/shop/css/style-common.css");
+
+footer {
+	bottom: 0;
+}
+
+.footer-black {
+	margin-top: 100px;
+	padding: 20px 0px;
+	height: 350px;
+	background-color: #1e1e1e;
+	display: block;
+}
+
+.footer-division-1 {
+	padding-bottom: 40px;
+	border-bottom: 1px solid #333;
+}
+
+.footer-division-2 {
+	padding-top: 40px;
+}
+
+.footer-tel {
+	color: white;
+	font-size: 32px;
+	margin-bottom: 10px;
+	font-weight: bold;
+}
+
+.footer-text {
+	color: #e2e2e2;
+	font-size: 13px; 
+	opacity: 0.56;
+	font-weight: 500;
+}
+
+.footer-link-company {
+	margin-top: 10px;
+	color: white;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.footer-sep {
+	font-size: 13px;
+}

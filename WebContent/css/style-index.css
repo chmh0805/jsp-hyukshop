@@ -1,0 +1,87 @@
+@import url("style-common.css");
+
+.carousel-inner img {
+  width: 100%;
+  height: 100%;
+}
+
+#main-prd {
+	height: 2000px;
+}
+
+.main-pagetitle {
+	text-align: center;
+	width: 100%;
+	height: 80px;
+	padding-top: 40px;
+	margin-bottom: 30px;
+}
+
+.main-pagetitle-word {
+	font-weight: 700;
+	font-size: 24px;
+}
+
+.main-item-box {
+	width: 100%;
+	height: auto;
+}
+
+.main-prd-list {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	grid-gap: 10px;
+	grid-auto-rows: minmax(100px, auto);
+}
+
+.link-prod {
+	width: auto;
+	height: auto;
+	text-decoration: none;
+}
+
+.main-prd-item {
+	padding-bottom: 30px;
+	height: 390px;
+	margin: 0px;
+	list-style: none;
+}
+
+.main-prd-item * {
+	text-decoration: none;
+	color: black;
+	list-style: none;
+}
+
+.main-prd-item-img {
+	width: 100%;
+	height: 254px;
+}
+
+.prd-item-company {
+	font-size: 15px;
+	text-decoration: none;
+}
+
+.prd-item-name {
+	display: inline-block;
+	font-size: 17px;
+	font-weight: 500;
+	max-width: 240px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.prd-item-price {
+	font-size: 20px;
+	font-weight: 1000;
+}
+
+.prd-item-soldCount {
+	color: #757575;
+	font-size: 13px;
+}
+
+
+

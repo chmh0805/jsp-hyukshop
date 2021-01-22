@@ -1,0 +1,88 @@
+@import url("style-common.css");
+
+#header-first {
+    max-width: 1300px;
+    padding: 20px 40px;
+    margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+	height: 120px;
+	border-bottom: 1px solid #DDDDDD;
+}
+
+#header-banner {
+    width: 100%;
+    height: 100px;
+}
+
+#header-logo {
+    padding-top: 30px;
+    width: 190px;
+    height: 80px;
+    margin-right: 3px;
+}
+
+#header-logo-img {
+	width: 150px;
+    height: 25px;
+}
+
+#headerSearchForm {
+    border: 0px;
+    background-color: #EEEEEE;
+    border-radius: 25px;
+    margin-top: 30px;
+	width: 504px;
+	height: 40px;
+}
+
+.headerSearchForm-btn {
+    margin-left: 14px;
+    margin-top: 8px;
+    width: 24px;
+    height: 24px;
+    border: none;
+    outline: none;
+}
+
+.headerSearchForm-input {
+    width: 440px;
+    border: none;
+    outline: none;
+    background-color: #EEEEEE;
+}
+
+#header-main-menu {
+    padding-top: 30px;
+    width: 280px;
+    height: 81px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.header-sub-menu {
+    margin: 0 3px 0 3px;
+    font-size: 13px;
+    font-weight: bold;     
+    text-decoration: none;
+    color: black;
+}
+
+#header-second {
+	max-width: 1300px;
+    padding: 10px 40px;
+    margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+	height: 120px;
+}
+
+.header-second-btn-group {
+	width: 200px;
+	height: 60px;
+}
+
+.border-btm-red {
+	border-bottom: 2px solid #FF204B;
+}
+

@@ -1,0 +1,11 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+.frame {
+	max-width: 1300px;
+    padding: 0 30px;
+    margin: 0 auto;
+}
