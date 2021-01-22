@@ -1,4 +1,4 @@
-package com.shop.shop.domain.naver;
+package com.shop.shop.domain.naver.dto;
 
 import lombok.Data;
 

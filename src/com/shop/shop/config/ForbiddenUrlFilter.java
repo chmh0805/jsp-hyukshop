@@ -23,6 +23,8 @@ public class ForbiddenUrlFilter implements Filter {
 			chain.doFilter(request, response);
 		} else if (request.getRequestURI().substring(request.getRequestURI().lastIndexOf("/")).equals("/jusoPopup.jsp")) { 
 			chain.doFilter(request, response);
+		} else if (request.getRequestURI().equals("/index.jsp")){
+			chain.doFilter(request, response);
 		} else {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 		}

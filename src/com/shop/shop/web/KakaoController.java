@@ -1,12 +1,6 @@
 package com.shop.shop.web;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,20 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.shop.shop.domain.kakao.KakaoDto;
+import com.shop.shop.domain.kakao.dto.KakaoDto;
 import com.shop.shop.domain.user.KakaoUser;
-import com.shop.shop.util.Script;
+import com.shop.shop.domain.user.User;
+import com.shop.shop.service.KakaoService;
 
 @WebServlet("/kakao_oauth")
 public class KakaoController  extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	KakaoService kakaoService;
        
     public KakaoController() {
         super();
+        kakaoService = new KakaoService();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -43,93 +36,27 @@ public class KakaoController  extends HttpServlet {
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		
-		KakaoDto kakaoDto = getDto(request.getParameter("code"), request, response);
-		session.setAttribute("kakaoDto", kakaoDto);
+		KakaoDto kakaoDto = kakaoService.getDto(request.getParameter("code"), request, response);
 		session.setAttribute("kakao_token", kakaoDto.getAccess_token());
-		session.setAttribute("isLogined", true);
 		
-		KakaoUser kakaoUser = getUserInfo(kakaoDto.getAccess_token());
-		System.out.println("kakaoUser : " + kakaoUser);
-		session.setAttribute("userType", "kakao"); // userType: kakao / naver / hyukshop
-		session.setAttribute("kakaoUser", kakaoUser);
-		session.setAttribute("name", kakaoUser.getNickname());
+		KakaoUser kakaoUser = kakaoService.getUserInfo(kakaoDto.getAccess_token());
 		
-		RequestDispatcher dis = request.getRequestDispatcher("/user/mypage.jsp");
-		dis.forward(request, response);
-	}
-	
-	
-	private KakaoUser getUserInfo (String access_token) throws IOException {
-		String reqURL = "https://kapi.kakao.com/v2/user/me";
-		String result = "";
-		String line = "";
-		URL url = new URL(reqURL);
-		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-		conn.setRequestMethod("POST");
-		
-		conn.setRequestProperty("Authorization", "Bearer " + access_token);
-		
-		BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-		while ((line = br.readLine()) != null) {
-			result += line;
-		}
-		
-		Gson gson = new Gson();
-		JsonParser parser = new JsonParser();
-        JsonElement element = parser.parse(result);
-        
-        int id = element.getAsJsonObject().get("id").getAsInt();
-        JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
-        KakaoUser kakaoUser = gson.fromJson(properties, KakaoUser.class);
-        kakaoUser.setId(id);
-        
-        return kakaoUser;
-	}
-	
-	
-	private KakaoDto getDto (String authorize_code, HttpServletRequest request, HttpServletResponse response) throws IOException {
-		BufferedReader br;
-		
-		if (request.getParameter("error") != null) {
-			Script.back(response, "에러발생");
-			return null;
-		}
-		
-		String client_id = "70b588e15fb703e050cb0b079505506f";
-		String redirect_uri = "http://localhost/shop/kakao_oauth";
-		String code = authorize_code;
-//		String client_secret = "wRdhBCOcIcKZG3rRD8qCOYq8Rudk3V82";
-
-		StringBuilder sb = new StringBuilder();
-		sb.append("grant_type=authorization_code");
-		sb.append("&client_id="+client_id);
-		sb.append("&redirect_uri="+redirect_uri);
-		sb.append("&code="+code);
-		
-		final String AUTH_HOST = "https://kauth.kakao.com";
-		final String tokenRequestURL = AUTH_HOST + "/oauth/token";
-		
-		URL url = new URL(tokenRequestURL);
-		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-		conn.setRequestMethod("POST");
-		conn.setDoOutput(true);
-		
-		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
-		writer.write(sb.toString());
-		writer.flush();
-		
-		int respCode = conn.getResponseCode();
-		
-		if (respCode == 200) {
-			br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+		long kakaoId = kakaoUser.getId();
+		User userEntity = kakaoService.카카오로그인(kakaoId);
+		if (userEntity == null) {
+			request.setAttribute("kakaoId", kakaoUser.getId());
+			request.setAttribute("name", kakaoUser.getNickname());
+			RequestDispatcher dis = request.getRequestDispatcher("/user/kakaoJoin.jsp");
+			dis.forward(request, response);
 		} else {
-			br = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+			session.setAttribute("principal", userEntity);
+			RequestDispatcher dis = request.getRequestDispatcher("/index.jsp");
+			dis.forward(request, response);
 		}
 		
-		Gson gson = new Gson();
-		KakaoDto kakaoDto = gson.fromJson(br.readLine(), KakaoDto.class);
-		
-		return kakaoDto;
 	}
+	
+	
+
 	
 }

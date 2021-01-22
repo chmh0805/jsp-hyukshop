@@ -1,4 +1,4 @@
-package com.shop.shop.domain.kakao;
+package com.shop.shop.domain.kakao.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -54,7 +54,7 @@
 
 #header-main-menu {
     padding-top: 30px;
-    width: 280px;
+    width: auto;
     height: 81px;
 	display: flex;
 	justify-content: space-between;

@@ -8,4 +8,5 @@ public class NaverUser {
 	private String email; // 이메일
 	private String mobile; // 전화번호
 	private String name; // 이름
+	private String auth;
 }

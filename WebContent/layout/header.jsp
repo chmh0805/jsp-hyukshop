@@ -41,11 +41,15 @@
 	        <input name="keyword" placeholder="돋보기" class="headerSearchForm-input"/>
 	    </form>
 	    <c:choose>
-		    <c:when test="${sessionScope.isLogined eq true }">
+		    <c:when test="${sessionScope.principal != null}">
 			    <div id="header-main-menu">
+			    	<c:if test="${sessionScope.principal.auth eq 'admin' }">
+			    	<a href="#" class="header-sub-menu">상품등록</a>
+			    	<a href="#" class="header-sub-menu">상품수정</a>
+			    	</c:if>
 			        <a href="#" class="header-sub-menu">찜</a>
 			        <a href="#" class="header-sub-menu">장바구니</a>
-			        <a href="<%=request.getContextPath() %>/user?cmd=mypage" class="header-sub-menu">마이페이지</a>
+			        <a href="<%=request.getContextPath() %>/user?cmd=checkAgain" class="header-sub-menu">마이페이지</a>
 			        <a href="<%=request.getContextPath() %>/user?cmd=logout" class="header-sub-menu">로그아웃</a>
 			    </div>
 		    </c:when>

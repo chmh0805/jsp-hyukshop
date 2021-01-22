@@ -29,7 +29,7 @@
     	<div class="input-group-prepend">
 		    <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
 		</div>
-    	<input name="phone" class="form-control" placeholder="휴대폰번호 입력" type="text" required/>
+    	<input name="phone" class="form-control" placeholder="휴대폰번호 입력('-' 포함)" type="text" required/>
     </div> <!-- form-group// -->
     <div class="form-group input-group fg-x700">
     	<div class="input-group-prepend">
@@ -47,7 +47,7 @@
     <div class="fg-x700 form-group">
         <button type="submit" class="btn btn-primary btn-block"> 회원 가입  </button>
     </div> <!-- form-group// -->      
-    <p class="text-center" style="margin-right: 70px;">카카오 / 네이버 로그인도 가능합니다. <a href="user?cmd=loginForm">로그인</a> </p>                                                                 
+    <p class="text-center">카카오 / 네이버를 통한 로그인도 가능합니다. <a href="user?cmd=loginForm">로그인</a> </p>                                                                 
 </form>
 </article>
 </div> <!-- card.// -->
