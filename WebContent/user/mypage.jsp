@@ -16,7 +16,7 @@
 <article class="card-body" style="max-width: 700px; margin: auto;">
     <!-- 회원가입 form태그 시작 -->
 	<form method="post" action="user?cmd=update">
-	<input type="hidden" value="${userUpdate.id}"/>
+	<input type="hidden" name="id" value="${userUpdate.id}"/>
 	<div class="form-group input-group fg-x700">
 		<div class="input-group-prepend">
 		    <span class="input-group-text"> <i class="fa fa-user"></i> </span>

@@ -35,9 +35,8 @@
 }
 
 .link-prod {
-	width: auto;
-	height: auto;
 	text-decoration: none;
+	display: block;
 }
 
 .main-prd-item {
@@ -47,7 +46,7 @@
 	list-style: none;
 }
 
-.main-prd-item * {
+.main-prd-item  * {
 	text-decoration: none;
 	color: black;
 	list-style: none;
@@ -60,7 +59,6 @@
 
 .prd-item-company {
 	font-size: 15px;
-	text-decoration: none;
 }
 
 .prd-item-name {

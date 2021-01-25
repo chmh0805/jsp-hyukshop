@@ -15,7 +15,7 @@ var mySwiper = new Swiper('.swiper-container', {
 		nextEl: '.swiper-button-next',
 		prevEl: '.swiper-button-prev'
 	}
-})
+});
 
 function realInfoBox() {
 	if (realInfoOn == false) {
@@ -25,7 +25,7 @@ function realInfoBox() {
 		realInfoOn = false;
 		$("#realInfo-box").hide();
 	}
-}
+};
 
 function addressInfoBox() {
 	if (addressInfoOn == false) {
@@ -35,8 +35,45 @@ function addressInfoBox() {
 		addressInfoOn = false;
 		$("#addressInfo-box").hide();
 	}
-}
+};
 
+function addFavor(userId, prodId) {
+	var dto = {
+		userId: userId,
+		prodId: prodId
+	};
+
+	$.ajax({
+		type: "POST",
+		url: "/shop/favor?cmd=favAdd",
+		data: JSON.stringify(dto),
+		contentType: "application/json; charset=utf-8",
+		dataType: "text"
+	}).done(function(result){
+		if (result === '200') {
+			location.reload();
+		}
+	})
+};
+
+function rmvFavor(userId, prodId) {
+	var dto = {
+		userId: userId,
+		prodId: prodId
+	};
+
+	$.ajax({
+		type: "POST",
+		url: "/shop/favor?cmd=favRmv",
+		data: JSON.stringify(dto),
+		contentType: "application/json; charset=utf-8",
+		dataType: "text"
+	}).done(function(result){
+		if (result === '200') {
+			location.reload();
+		}
+	})
+};
 
 var tab1 = $("#detail-img-text-box").offset().top - 100;
 var tab2 = $("#detail-review-box").offset().top - 100;

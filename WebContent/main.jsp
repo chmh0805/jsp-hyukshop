@@ -41,11 +41,11 @@
 		<div class="main-pagetitle">
 			<h1 class="main-pagetitle-word">
 			<c:choose>
-				<c:when test="${sessionScope.name eq null }">
+				<c:when test="${sessionScope.principal eq null }">
 					당신을 위한 추천
 				</c:when>
 				<c:otherwise>
-					${sessionScope.name }님을 위한 추천
+					${sessionScope.principal.name }님을 위한 추천
 				</c:otherwise>
 			</c:choose>
 			</h1>
@@ -53,7 +53,7 @@
 		<div class="main-item-box">
 			<div class="main-prd-list">
 				<c:forEach var="product" items="${productList30}">
-					<a class="link-prod" href="/shop/product?cmd=detail&item=${product.id}">
+					<a class="link-prod" href="/shop/product?cmd=detail&prodNo=${product.productId}">
 						<ul class="main-prd-item">
 							<img src="${product.imgUrl_1}" class="main-prd-item-img" /> <!-- 상품이미지 -->
 							<li class="prd-item-company">${product.companyName}</li> <!-- 제조사 -->

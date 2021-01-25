@@ -1,0 +1,47 @@
+@import url("/shop/css/style-common.css");
+
+.favor-head {
+	height: 60px;
+	margin: 0 auto;
+	text-align: center;
+	padding-top: 10px;
+	font-size: 30px;
+	font-weight: 500;
+}
+
+.favor-sidebar {
+	float: left;
+	margin-top: 20px;
+	width: 240px;
+	height: 400px;
+	padding-right: 13px;
+}
+
+.favor-sidebar-title {
+    width: 90%;
+    height: 60px;
+    padding: 0;
+    color: #1e1e1e;
+    font-size: 18px;
+    line-height: 60px;
+    font-weight: 600;
+}
+
+.favor-content {
+	padding: 20px 0px 20px 38px;
+    color: #000;
+    font-size: 15px;
+    font-weight: 500;
+    border-top: 1px solid #e7e7e7;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+.favor-sidebar-compList {
+	list-style: none;
+}
+
+.favor-sidebar-comp {
+	margin: 2px;
+	margin-left: 24px;
+	padding-left: 3px;
+}

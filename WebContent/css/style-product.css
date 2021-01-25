@@ -178,6 +178,7 @@
 
 .wrap-detail-info {
 	position: relative;
+	padding-top: 0px;
 }
 
 
@@ -211,6 +212,12 @@
 	font-weight: 500;
 	color: #9a9a9e;
 	text-decoration: none;
+}
+
+#detail-img-text-box {
+	height: auto;
+	margin: 150px 0px;
+	text-align: center;
 }
 
 #detail-review-box {
@@ -263,4 +270,57 @@
 	padding: 40px 0 30px 40px;
 	margin-bottom: 100px;
 	line-height: 3;
+}
+
+.product-insert-table {
+	height: 200px;
+}
+
+.product-insert-table > tr {
+	height: 30px;
+}
+
+.detail-qna-header-a {
+	float: right;
+	font-size: 18px;
+	padding-top: 15px;
+	color: black;
+	text-decoration: none;
+}
+
+#detail-qna-write {
+	margin-left: 3%;
+	text-decoration: none;
+}
+
+.detail-qna-body a {
+	color: black;
+}
+
+.detail-qna-item-createDate {
+	float: right;
+	margin-left: 15px;
+	padding-right: 15px;
+}
+
+.detail-qna-item-detail {
+	display: inline-block;
+	max-width: 800px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-size: 17px;
+}
+
+.detail-qna-item-number {
+	float: left;
+	margin-right: 15px;
+	padding-left: 15px;
+	font-size: 17px;
+	font-weight: 600;
+}
+
+.detail-qna-item {
+	height: 60px;
+	padding-top: 22px;
 }

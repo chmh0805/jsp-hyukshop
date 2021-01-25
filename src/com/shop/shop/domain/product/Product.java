@@ -10,8 +10,7 @@ import lombok.Data;
 public class Product {
 	private int id;
 	private String productName;
-	private int companyNo;
-	private String companyName;
+	private int companyId;
 	private long price;
 	private int soldCount;
 	private String detail;

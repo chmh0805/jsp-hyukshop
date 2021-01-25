@@ -19,6 +19,7 @@ import com.shop.shop.service.KakaoService;
 import com.shop.shop.service.NaverService;
 import com.shop.shop.service.UserService;
 import com.shop.shop.util.Logout;
+import com.shop.shop.util.SHA256;
 import com.shop.shop.util.Script;
 
 @WebServlet("/user")
@@ -95,7 +96,7 @@ public class UserController extends HttpServlet {
 			HttpSession session = request.getSession();
 			User userEntity = (User) session.getAttribute("principal");
 			int userId = userEntity.getId();
-			String password = request.getParameter("password");
+			String password = SHA256.toSHA256(request.getParameter("password"));
 			
 			User userUpdate = userService.회원정보수정요청(userId, password);
 			if (userUpdate == null) {
@@ -112,7 +113,7 @@ public class UserController extends HttpServlet {
 					.email(request.getParameter("email"))
 					.phone(request.getParameter("phone"))
 					.address(request.getParameter("address"))
-					.password(request.getParameter("password"))
+					.password(SHA256.toSHA256(request.getParameter("password")))
 					.build();
 			int result = userService.회원정보수정(updateUser);
 			
@@ -130,7 +131,7 @@ public class UserController extends HttpServlet {
 					.email(request.getParameter("email"))
 					.phone(request.getParameter("phone"))
 					.address(request.getParameter("address"))
-					.password(request.getParameter("password"))
+					.password(SHA256.toSHA256(request.getParameter("password")))
 					.build();
 			int result = userService.회원가입(naverJoinUser);
 			
@@ -152,7 +153,7 @@ public class UserController extends HttpServlet {
 					.email(request.getParameter("email"))
 					.phone(request.getParameter("phone"))
 					.address(request.getParameter("address"))
-					.password(request.getParameter("password"))
+					.password(SHA256.toSHA256(request.getParameter("password")))
 					.build();
 			int result = userService.회원가입(kakaoJoinUser);
 			
@@ -174,7 +175,7 @@ public class UserController extends HttpServlet {
 					.email(request.getParameter("email"))
 					.phone(request.getParameter("phone"))
 					.address(request.getParameter("address"))
-					.password(request.getParameter("password"))
+					.password(SHA256.toSHA256(request.getParameter("password")))
 					.build();
 			
 			int result = userService.회원가입(joinUser);
@@ -189,7 +190,7 @@ public class UserController extends HttpServlet {
 			}
 			
 		} else if (cmd.equals("login")) {
-			User userEntity = userService.로그인(request.getParameter("username"), request.getParameter("password"));
+			User userEntity = userService.로그인(request.getParameter("username"), SHA256.toSHA256(request.getParameter("password")));
 			if (userEntity == null) {
 				Script.back(response, "로그인 실패");
 			} else {
@@ -199,6 +200,10 @@ public class UserController extends HttpServlet {
 				dis.forward(request, response);
 			}
 			
+		} else if (cmd.equals("favor")) {
+			dis = request.getRequestDispatcher("/user/favorite.jsp");
+			dis.forward(request, response);
+
 		}
 		
 	}

@@ -1,0 +1,48 @@
+@import url("/shop/css/style-common.css");
+
+.qna-writer-title {
+	height: 100px;
+	display: flex;
+	justify-content: left;
+	flex-wrap: wrap; 
+}
+
+.optionNo {
+	width: auto;
+	margin-right: 5%;
+}
+
+#optionNo {
+	width: 100%;
+}
+
+.qna-name-header {
+	width: auto;
+	margin-right: 1%;
+}
+
+.qna-name {
+	width: auto;
+	margin-right: 5%;
+}
+
+.qna-password-header {
+	width: auto;
+	margin-right: 1%;
+}
+
+.qna-password {
+	width: 10%;
+}
+
+.qna-upload-btn {
+	margin: 30px auto 0px auto;
+	width: 40%;
+	height: auto;
+	line-height: 40px;
+	cursor: pointer;
+	border: 1px solid #e1e1e1;
+	font-size: 30px;
+	font-weight: 400;
+	text-align: center;
+}

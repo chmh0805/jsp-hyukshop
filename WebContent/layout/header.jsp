@@ -23,6 +23,9 @@
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <!-- kakao script -->
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+<!-- include summernote css/js -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <!-- End of Script -->
 <title>Hyukshop</title>
 </head>
@@ -44,10 +47,10 @@
 		    <c:when test="${sessionScope.principal != null}">
 			    <div id="header-main-menu">
 			    	<c:if test="${sessionScope.principal.auth eq 'admin' }">
-			    	<a href="#" class="header-sub-menu">상품등록</a>
+			    	<a href="<%=request.getContextPath() %>/product?cmd=insertPage" class="header-sub-menu">상품등록</a>
 			    	<a href="#" class="header-sub-menu">상품수정</a>
 			    	</c:if>
-			        <a href="#" class="header-sub-menu">찜</a>
+			        <a href="<%=request.getContextPath() %>/user?cmd=favor" class="header-sub-menu">찜</a>
 			        <a href="#" class="header-sub-menu">장바구니</a>
 			        <a href="<%=request.getContextPath() %>/user?cmd=checkAgain" class="header-sub-menu">마이페이지</a>
 			        <a href="<%=request.getContextPath() %>/user?cmd=logout" class="header-sub-menu">로그아웃</a>
@@ -55,7 +58,7 @@
 		    </c:when>
 		    <c:otherwise>
 		    	<div id="header-main-menu">
-			        <a href="#" class="header-sub-menu">찜</a>
+			        <a href="<%=request.getContextPath() %>/user?cmd=favor" class="header-sub-menu">찜</a>
 			        <a href="#" class="header-sub-menu">장바구니</a>
 			        <a href="<%=request.getContextPath() %>/user?cmd=loginForm" class="header-sub-menu">로그인</a>
 			        <a href="<%=request.getContextPath() %>/user?cmd=joinForm" class="header-sub-menu">회원가입</a>
@@ -67,7 +70,7 @@
     <div id="header-second">
 	    <div class="btn-group header-second-btn-box">
 		<c:choose>
-			<c:when test="${pageContext.request.requestURI eq '/shop/' }">
+			<c:when test="${pageContext.request.requestURI eq '/shop/main.jsp' }">
 				<button type="button" id="header-sec-home" onclick="location.href='/shop/';" class="btn btn-basic header-second-btn-group border-btm-red">
 					홈
 				</button>
@@ -89,12 +92,11 @@
 			     전체상품
 			  </button>
 			  <div class="dropdown-menu">
-			  	<h5 class="dropdown-header">신발</h5>
-			    	<a class="dropdown-item" href="#">구두</a>
-			    	<a class="dropdown-item" href="#">부츠</a>
-			    	<a class="dropdown-item" href="#">러닝화</a>
-			    	<a class="dropdown-item" href="#">캔버스/단화</a>
-			    	<a class="dropdown-item" href="#">기타스니커즈</a>
+			  	<h5 class="dropdown-header">브랜드별</h5>
+		    	<a class="dropdown-item" href="<%=request.getContextPath() %>/product?cmd=search&compNo=1">LOUIS VUITTON</a>
+		    	<a class="dropdown-item" href="<%=request.getContextPath() %>/product?cmd=search&compNo=2">MAISON MARGIELA</a>
+		    	<a class="dropdown-item" href="<%=request.getContextPath() %>/product?cmd=search&compNo=3">SAINT LAURENT</a>
+		    	<a class="dropdown-item" href="<%=request.getContextPath() %>/product?cmd=search&compNo=4">DIOR</a>
 			  </div>
 			</div>
 		</div>
