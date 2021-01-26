@@ -3,6 +3,7 @@ package com.shop.shop.web;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -99,6 +100,26 @@ public class ProductController extends HttpServlet {
 				out.print("500");
 			}
 			out.flush();
+			
+		} else if (cmd.equals("search")) {
+			List<IndexDto> searchedProductList = new ArrayList<>();
+			String keyword = request.getParameter("keyword");
+			String compNo = request.getParameter("compNo");
+			if (keyword != null) {
+				searchedProductList = productService.상품키워드찾기(keyword);
+				request.setAttribute("searchedProductList", searchedProductList);
+			}
+			if (compNo != null) {
+				searchedProductList = productService.상품회사코드찾기(Integer.parseInt(compNo));
+				request.setAttribute("searchedProductList", searchedProductList);
+			}
+			if (searchedProductList.size() == 0) {
+				List<IndexDto> productList30 = productService.상품전체보기(30);
+				request.setAttribute("productList30", productList30);
+			}
+			
+			dis = request.getRequestDispatcher("/product/search.jsp");
+			dis.forward(request, response);
 			
 		}
 

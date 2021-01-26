@@ -28,6 +28,7 @@
 }
 
 #headerSearchForm {
+	position: relative;
     border: 0px;
     background-color: #EEEEEE;
     border-radius: 25px;
@@ -46,10 +47,14 @@
 }
 
 .headerSearchForm-input {
-    width: 440px;
+	position: absolute;
+	margin-left: 3%;
+	top: 22%;
+    width: 80%;
     border: none;
     outline: none;
     background-color: #EEEEEE;
+    margin-bottom: 10px;
 }
 
 #header-main-menu {

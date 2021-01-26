@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.shop.shop.config.DB;
 import com.shop.shop.domain.product.dto.DetailProdRespDto;
+import com.shop.shop.domain.product.dto.HeaderBrandDto;
 import com.shop.shop.domain.product.dto.IndexDto;
 import com.shop.shop.domain.product.dto.InsertReqDto;
 
@@ -24,6 +25,79 @@ public class ProductDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, limitNum);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				IndexDto indexDto = IndexDto.builder()
+						.productId(rs.getInt("p.id"))
+						.productName(rs.getString("p.productName"))
+						.companyName(rs.getString("c.name"))
+						.price(rs.getLong("p.price"))
+						.soldCount(rs.getInt("p.soldCount"))
+						.imgUrl_1(rs.getString("p.imgUrl_1"))
+						.build();
+				result.add(indexDto);
+			}
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DB.close(conn, pstmt, rs);
+		}
+		return null;
+	}
+	
+	public List<IndexDto> findByKeyword(String keyword) {
+		Connection conn = DB.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		StringBuffer sb = new StringBuffer(); 
+		sb.append("SELECT p.id, p.productName, c.name, p.price, ");
+		sb.append("p.soldCount, p.imgUrl_1 FROM product p ");
+		sb.append("INNER JOIN company c ON p.companyId = c.id ");
+		sb.append("WHERE p.productName LIKE '%"+keyword+"%' OR c.name LIKE '%"+keyword+"%'");
+		String sql = sb.toString();
+		
+		List<IndexDto> result = new ArrayList<>();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				IndexDto indexDto = IndexDto.builder()
+						.productId(rs.getInt("p.id"))
+						.productName(rs.getString("p.productName"))
+						.companyName(rs.getString("c.name"))
+						.price(rs.getLong("p.price"))
+						.soldCount(rs.getInt("p.soldCount"))
+						.imgUrl_1(rs.getString("p.imgUrl_1"))
+						.build();
+				result.add(indexDto);
+			}
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DB.close(conn, pstmt, rs);
+		}
+		return null;
+	}
+	
+	public List<IndexDto> findByCompNo(int compNo) {
+		Connection conn = DB.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		StringBuffer sb = new StringBuffer(); 
+		sb.append("SELECT p.id, p.productName, c.name, p.price, ");
+		sb.append("p.soldCount, p.imgUrl_1 FROM product p ");
+		sb.append("INNER JOIN company c ON p.companyId = c.id ");
+		sb.append("WHERE p.companyId = ?");
+		String sql = sb.toString();
+		
+		List<IndexDto> result = new ArrayList<>();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, compNo);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				IndexDto indexDto = IndexDto.builder()
@@ -101,6 +175,32 @@ public class ProductDao {
 						.build();
 				return dto;
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DB.close(conn, pstmt, rs);
+		}
+		return null;
+	}
+	
+	public List<HeaderBrandDto> getAllCompName() {
+		Connection conn = DB.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT id, name FROM company";
+		List<HeaderBrandDto> compNameList = new ArrayList<>();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				HeaderBrandDto dto = HeaderBrandDto.builder()
+						.id(rs.getInt("id"))
+						.name(rs.getString("name"))
+						.build();
+				compNameList.add(dto);
+			}
+			return compNameList;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
