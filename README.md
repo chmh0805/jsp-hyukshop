@@ -56,10 +56,10 @@ use shopdb;
 
 ```sql
 CREATE TABLE product(
-	id int primary key auto_increment,
+    id int primary key auto_increment,
     productName varchar(120) unique not null,
     companyId int not null,
-	price long not null,
+    price long not null,
     soldCount int default 0,
     detail longtext not null,
     imgUrl_1 varchar(100) not null,
@@ -74,7 +74,7 @@ CREATE TABLE product(
 
 ```sql
 CREATE TABLE user(
-	id int primary key auto_increment,
+    id int primary key auto_increment,
     username varchar(20) unique default null,
     name varchar(20) not null,
     email varchar(50) not null,
@@ -90,7 +90,7 @@ CREATE TABLE user(
 
 ```sql
 CREATE TABLE company (
-	id int primary key auto_increment,
+    id int primary key auto_increment,
     name varchar(40) unique not null,
     url varchar(80) unique
 );
@@ -98,7 +98,7 @@ CREATE TABLE company (
 
 ```sql
 CREATE TABLE favorite(
-	id int primary key auto_increment,
+    id int primary key auto_increment,
     userId int not null,
     productId int not null,
     createDate timestamp default now()
@@ -107,7 +107,7 @@ CREATE TABLE favorite(
 
 ```sql
 CREATE TABLE cart(
-	id int primary key auto_increment,
+    id int primary key auto_increment,
     userId int not null,
     productId int not null,
     createDate timestamp default now()
@@ -116,7 +116,7 @@ CREATE TABLE cart(
 
 ```sql
 CREATE TABLE qna(
-	id int primary key auto_increment,
+    id int primary key auto_increment,
     userId int not null,
     productId int not null,
     optionNo int not null,
@@ -128,7 +128,7 @@ CREATE TABLE qna(
 
 ```sql
 CREATE TABLE review(
-	id int primary key auto_increment,
+    id int primary key auto_increment,
     userId int not null,
     productId int not null,
     detail longtext not null,
