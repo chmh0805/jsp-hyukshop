@@ -12,8 +12,15 @@ $(window).on("scroll", function() {
     }
 });
 
+var prodIdList = new Array();
+
 $(function(){
 	IMP.init('imp59232554');
+	
+	var prodIdBoxList = document.getElementsByClassName("check-out-box-prodId-for-js");
+	for (var i = 0; i < prodIdBoxList.length; i++) {
+		prodIdList.push(prodIdBoxList.item(i).value*1);
+	}
 });
 
 function request_to_check(userId, allPrice, email, name, phone, address) {
@@ -29,6 +36,13 @@ function request_to_check(userId, allPrice, email, name, phone, address) {
 	    buyer_addr : address
 	}, function(rsp) {
 	    if ( rsp.success ) {
+	    	prodIdList.forEach(function(element){
+	    		$.ajax({
+	    			type: "get",
+	    			url: "/shop/product?cmd=soldCountUpdate&prodId="+element
+	    		})
+	    	});
+	    	
 	        var impTitle = '결제가 완료되었습니다.';
 	        var impMsg = '고유ID : ' + rsp.imp_uid;
 	        impMsg += '상점 거래ID : ' + rsp.merchant_uid;
@@ -45,7 +59,7 @@ function request_to_check(userId, allPrice, email, name, phone, address) {
 					clearInterval(timerInterval)
 				}
 			}).then(() => {
-				location.href='/index.jsp';
+				location.href='/shop/index.jsp';
 			})
 	    } else {
 	        var impTitle = '결제에 실패하였습니다.';

@@ -170,6 +170,10 @@ public class ProductController extends HttpServlet {
 			out.print(data);
 			out.flush();
 			
+		} else if (cmd.equals("soldCountUpdate")) {
+			int prodId = Integer.parseInt(request.getParameter("prodId"));
+			productService.구매수증가(prodId);
+			
 		}
 
 	}

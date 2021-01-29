@@ -15,6 +15,28 @@ import com.shop.shop.domain.user.dto.UpdateUser;
 
 public class UserDao {
 	
+	public boolean findForChangeCheck(int id, String password) {
+		Connection conn = DB.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT id FROM user WHERE id = ? AND password = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			pstmt.setString(2, password);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				return false; // 변경안했음
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DB.close(conn, pstmt, rs);
+		}
+		return true; // 변경했음
+	}
+	
 	public List<Integer> findForCartList(int id) {
 		Connection conn = DB.getConnection();
 		PreparedStatement pstmt = null;

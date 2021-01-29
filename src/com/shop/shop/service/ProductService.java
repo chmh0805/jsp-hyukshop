@@ -55,4 +55,8 @@ public class ProductService {
 	public List<CheckoutProdDto> 구매상품정보(List<Integer> cartList) {
 		return productDao.findForBuy(cartList);
 	}
+	
+	public void 구매수증가(int prodId) {
+		productDao.updateSoldCount(prodId);
+	}
 }

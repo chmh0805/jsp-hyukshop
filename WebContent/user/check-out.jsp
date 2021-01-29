@@ -61,6 +61,7 @@
 				<h3 class="f20-bd-333 mgb20">배송 상품</h3>
 				<c:choose>
 					<c:when test="${prodInfo ne null}">
+					<input type="hidden" class="check-out-box-prodId-for-js" value="${prodInfo.id }" />
 					<ul class="order-prod-list">
 						<li class="order-prod-info">
 							<div class="order-prod-img">
@@ -81,6 +82,7 @@
 					</c:when>
 					<c:when test="${prodList ne null}">
 					<c:forEach var="prodInfo" items="${prodList}">
+					<input type="hidden" class="check-out-box-prodId-for-js" value="${prodInfo.id }" />
 					<ul class="order-prod-list">
 						<li class="order-prod-info">
 							<div class="order-prod-img">

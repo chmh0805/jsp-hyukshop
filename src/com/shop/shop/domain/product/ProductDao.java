@@ -15,6 +15,22 @@ import com.shop.shop.domain.product.dto.InsertReqDto;
 
 public class ProductDao {
 	
+	public void updateSoldCount(int prodId) {
+		Connection conn = DB.getConnection();
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE product SET soldCount = soldCount+1 WHERE id = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, prodId);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DB.close(conn, pstmt);
+		}
+	}
+	
 	public List<CheckoutProdDto> findForBuy(List<Integer> cartList) {
 		Connection conn = DB.getConnection();
 		PreparedStatement pstmt = null;

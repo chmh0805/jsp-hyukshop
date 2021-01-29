@@ -112,13 +112,26 @@ public class UserController extends HttpServlet {
 			}
 			
 		} else if (cmd.equals("update")) {
-			UpdateUser updateUser = UpdateUser.builder()
-					.id(Integer.parseInt(request.getParameter("id")))
-					.email(request.getParameter("email"))
-					.phone(request.getParameter("phone"))
-					.address(request.getParameter("address"))
-					.password(SHA256.toSHA256(request.getParameter("password")))
-					.build();
+			int userId = Integer.parseInt(request.getParameter("id"));
+			String inputPassword = request.getParameter("password");
+			UpdateUser updateUser = null;
+			if (userService.비밀번호변경여부조회(userId, inputPassword)) {
+				updateUser = UpdateUser.builder()
+						.id(Integer.parseInt(request.getParameter("id")))
+						.email(request.getParameter("email"))
+						.phone(request.getParameter("phone"))
+						.address(request.getParameter("address"))
+						.password(SHA256.toSHA256(request.getParameter("password")))
+						.build();
+			} else {
+				updateUser = UpdateUser.builder()
+						.id(Integer.parseInt(request.getParameter("id")))
+						.email(request.getParameter("email"))
+						.phone(request.getParameter("phone"))
+						.address(request.getParameter("address"))
+						.password(request.getParameter("password"))
+						.build();
+			}
 			int result = userService.회원정보수정(updateUser);
 			
 			if (result == 1) {

@@ -21,6 +21,10 @@ public class UserService {
 		return userDao.findByUserIdPassword(userId, password);
 	}
 	
+	public boolean 비밀번호변경여부조회(int id, String password) {
+		return userDao.findForChangeCheck(id, password);
+	}
+	
 	public int 회원정보수정(UpdateUser updateUser) {
 		return userDao.update(updateUser);
 	}
