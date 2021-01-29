@@ -1,0 +1,65 @@
+@import url("/shop/css/style-common.css");
+
+.pageForAll-table {
+	height: auto;
+}
+
+.pageForAll-table-title {
+	display: flex;
+	align-items: center;
+	height: 60px;
+	background-color: #F2F2F2;
+}
+
+.pageForAll-table-title-no {
+	width: 4%;
+	text-align: center;
+}
+
+.pageForAll-table-title-detail {
+	width: 80%;
+}
+
+.pageForAll-table-title-writer {
+	width: 6%;
+	text-align: center;
+}
+
+.pageForAll-table-title-date {
+	width: 10%;
+	text-align: center;
+}
+
+.pageForAll-table-body {
+	height: auto;
+}
+
+.pageForAll-table-row {
+	display: flex;
+	align-items: center;
+	height: 70px;
+}
+
+.pageForAll-table-row-no {
+	width: 4%;
+	text-align: center;
+}
+
+.pageForAll-table-row-detail {
+	width: 80%;
+}
+
+.pageForAll-table-row-detail > a {
+	text-decoration: none;
+	color: black;
+}
+
+.pageForAll-table-row-writer {
+	width: 6%;
+	text-align: center;
+}
+
+.pageForAll-table-row-date {
+	width: 10%;
+	text-align: center;
+}

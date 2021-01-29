@@ -1,4 +1,4 @@
-package com.shop.shop.domain.product.dto;
+package com.shop.shop.domain.favor.dto;
 
 import lombok.Data;
 

@@ -1,6 +1,7 @@
 package com.shop.shop.web;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,13 +11,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.shop.shop.domain.product.dto.CheckoutProdDto;
 import com.shop.shop.domain.user.User;
+import com.shop.shop.domain.user.dto.CheckoutRespDto;
 import com.shop.shop.domain.user.dto.JoinUser;
 import com.shop.shop.domain.user.dto.KakaoJoinUser;
 import com.shop.shop.domain.user.dto.NaverJoinUser;
 import com.shop.shop.domain.user.dto.UpdateUser;
 import com.shop.shop.service.KakaoService;
 import com.shop.shop.service.NaverService;
+import com.shop.shop.service.ProductService;
 import com.shop.shop.service.UserService;
 import com.shop.shop.util.Logout;
 import com.shop.shop.util.SHA256;
@@ -200,8 +204,30 @@ public class UserController extends HttpServlet {
 				dis.forward(request, response);
 			}
 			
-		} else if (cmd.equals("favor")) {
-			dis = request.getRequestDispatcher("/user/favorite.jsp");
+		} else if (cmd.equals("directBuy")) {
+			int userId = Integer.parseInt(request.getParameter("userId"));
+			CheckoutRespDto userInfo = userService.구매회원정보(userId);
+			request.setAttribute("userInfo", userInfo);
+			
+			int prodId = Integer.parseInt(request.getParameter("prodId"));
+			ProductService productService = new ProductService();
+			CheckoutProdDto prodInfo = productService.구매상품정보(prodId);
+			request.setAttribute("prodInfo", prodInfo);
+			
+			dis = request.getRequestDispatcher("/user/check-out.jsp");
+			dis.forward(request, response);
+			
+		} else if (cmd.equals("cartBuy")) {
+			int userId = Integer.parseInt(request.getParameter("userId"));
+			CheckoutRespDto userInfo = userService.구매회원정보(userId);
+			request.setAttribute("userInfo", userInfo);
+			
+			List<Integer> cartList = userService.장바구니번호리스트(userId);
+			ProductService productService = new ProductService();
+			List<CheckoutProdDto> prodList = productService.구매상품정보(cartList);
+			request.setAttribute("prodList", prodList);
+
+			dis = request.getRequestDispatcher("/user/check-out.jsp");
 			dis.forward(request, response);
 
 		}

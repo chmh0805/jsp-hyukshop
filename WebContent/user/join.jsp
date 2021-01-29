@@ -35,7 +35,7 @@
     	<div class="input-group-prepend">
 		    <span class="input-group-text"> <i class="fa fa-building"></i> </span>
 		</div>
-		<input name="address" id="Addr" class="form-control" placeholder="주소 입력" type="text" readonly required />
+		<input name="address" id="Addr" class="form-control" placeholder="주소 검색을 눌러 입력" type="text" required onkeypress="return false;" style="caret-color: transparent !important;" />
 		<input type="button" value="주소 검색" onclick="goPopup();" />
 	</div> <!-- form-group end.// -->
     <div class="form-group input-group fg-x700">
@@ -58,7 +58,6 @@
 <script>
 
 function goPopup(){
-	// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(https://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
     var pop = window.open("/shop/user/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes");
 }
 

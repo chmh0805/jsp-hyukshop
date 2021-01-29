@@ -1,6 +1,14 @@
+<%@page import="com.shop.shop.domain.user.User"%>
+<%@page import="com.shop.shop.util.Script"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/layout/header.jsp" %>
+<%
+	User principal = (User) session.getAttribute("principal");
+	if ((principal == null) || !(principal.getAuth().equals("admin"))) {
+		Script.back(response, "잘못된 접근입니다.");
+	}
+%>
 
 <div class="frame">
 	<table class="product-insert-table">

@@ -1,0 +1,383 @@
+@import url("/shop/css/style-common.css");
+
+.checkout-full-box {
+	width: 100%;
+	height: auto;
+}
+
+.checkout-bg-color {
+    background-color: #f9f9f9;
+    width: 100%;
+    height: 100%;
+   	padding-bottom: 200px;
+   	margin-bottom: -200px;
+}
+
+.checkout-full-wrp {
+	max-width: 1440px;
+    width: 100%;
+    margin: 0 auto !important;
+    padding: 0;
+    font-family: 'Galano Grotesque',"Apple SD Gothic Neo","Noto Sans KR","Helvetica Neue",sans-serif;
+    font-size: 13px;
+    line-height: 1.2;
+    color: #444;
+}
+
+.checkout-header-wrp {
+    overflow: hidden;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    padding: 100px 0 90px;
+}
+
+.checkout-info-wrp {
+	position: relative;
+	width: 100%;
+	height: auto;
+	margin: 0 auto;
+}
+
+.checkout-header-text {
+	display: inline-flex;
+	margin: 0;
+}
+
+.checkout-wrp-left {
+	padding-right: calc(46.9% - 24px);
+}
+
+.checkout-wrp-right {
+	position: fixed;
+	top: 43%;
+	left: calc(53.1% + 42px);
+    width: calc(53.1% - 42px);
+}
+
+.left-section-delivery-info {
+	width: auto;
+}
+
+.left-section-box {
+	margin: 0px 0px 10px;
+	padding: 80px;
+	background-color: white;
+}
+
+.delivery-condition {
+	position: relative;
+	padding-bottom: 40px;
+}
+
+.delivery-condition-name {
+	display: flex;
+	justify-content: space-between;
+}
+
+.delivery-condition-info {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	display: block;
+}
+
+.delivery-request {
+	margin: 25px 0 20px;
+}
+
+.btn-request {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-direction: row;
+	width: 100%;
+	padding: 13px 12px 11px;
+	text-align: left;
+	background-color: #f9f9f9;
+}
+
+.btn-change-addr {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.left-section-btn {
+    padding: 8px 9px 6px 8px;
+    border: 1px solid rgb(221, 221, 221);
+    background: rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+.delivery-user {
+	position: relative;
+    padding: 40px 0 0;
+    border-top: 1px solid #ececec;
+}
+
+.delivery-user-info {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.info-type {
+	display: inline-block;
+	width: 50px;
+	margin-right: 10px;
+    font-size: 13px;
+    font-weight: normal;
+    color: #999;
+}
+
+.info-value {
+    font-weight: normal;
+    color: #555;
+}
+
+.btn-change-order {
+	position: absolute;
+    top: 40px;
+    right: 0;
+    padding: 8px 9px 6px 8px;
+    border: 1px solid #ddd;
+}
+
+.section-order-info {
+	width: auto;
+}
+
+.order-prod-list {
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid #111;
+    list-style: none;
+}
+
+.order-prod-info {
+	display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    padding: 40px 0 40px 20px;
+    border-top: 1px solid #ececec;
+}
+
+.order-prod-img-a {
+	width: 80px;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    padding-top: 106px;
+}
+
+.order-prod-img-span {
+    display: block;
+    position: absolute;
+    inset: 0px;
+    transform: translate(50%, 50%);
+}
+
+.order-prod-img-span > img {
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    transform: translate(-50%, -50%);
+}
+
+.order-prod-text {
+	display: flex;
+	width: 100%;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-left: 25px;
+}
+
+.prod-brand {
+	margin: 0 0 10px;
+}
+
+.prod-name {
+	margin: 0 0 10px;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.6;
+    text-decoration: none;
+}
+
+.order-price-text {
+    margin: 0;
+    padding-top: 25px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    flex-direction: column;
+}
+
+.price-unit {
+	margin-left: 3px;
+}
+
+.checkout-middle-toolTip {
+	outline: none;
+	background: none;
+	border: none;
+}
+
+.checkout-middle-toolTip:focus {
+	outline: none;
+	border: none;
+}
+
+.section-payment-info {
+	width: auto;
+}
+
+.section-payment-info-title {
+	border-bottom: 1px solid #ececec;
+	padding-bottom: 20px;
+}
+
+.payment-type-list {
+	padding: 20px 0;
+	margin: 0;
+	list-style: none;
+}
+
+.right-section-info {
+	max-width: 634px;
+	width: auto;
+	margin: 0;
+	margin-right: 70px;
+}
+
+.right-section-price-info {
+	background-color: white;
+	position: relative;
+	margin-right: 70px;
+	padding: 80px;
+}
+
+.expected-price-list {
+	padding: 20px 0;
+	margin: 0;
+	list-style: none;
+}
+
+.expected-price-item {
+	margin: 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.total-expected-price {
+    margin-top: 20px;
+    margin-bottom: 100px;
+    padding-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #ececec;
+}
+
+.btn-order {
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 80px;
+	background: rgb(17, 17, 17);
+	border: none;
+}
+
+.modal-change-addr {
+	background-color: white;
+	width: 520px;
+	height: 680px;
+	position: relative;
+    padding: 110px 0px 0px;
+}
+
+.mh-modal-header {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    max-width: 520px;
+    height: 110px;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.mh-modal-body-wrap {
+	max-height: 490px;
+    width: 100%;
+    overflow: auto;
+}
+
+.mh-modal-body {
+    overflow: hidden auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 100%;
+    height: 490px;
+    padding: 0px 40px 20px;
+    margin: 0px 0px 80px;
+}
+
+.delivery-modal-info-list {
+    width: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    border-bottom: none;
+}
+
+.mh-modal-sector {
+	position: relative;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgb(236, 236, 236);
+}
+
+.delivery-modal-info-item-title {
+	padding: 14px 0 0 0;
+    display: flex;
+    align-items: flex-start;
+    width: 85px;
+}
+
+.delivery-modal-info-item-value {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: calc(100% - 85px);
+}
+

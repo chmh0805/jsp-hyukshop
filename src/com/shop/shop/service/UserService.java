@@ -1,7 +1,10 @@
 package com.shop.shop.service;
 
+import java.util.List;
+
 import com.shop.shop.domain.user.User;
 import com.shop.shop.domain.user.UserDao;
+import com.shop.shop.domain.user.dto.CheckoutRespDto;
 import com.shop.shop.domain.user.dto.JoinUser;
 import com.shop.shop.domain.user.dto.KakaoJoinUser;
 import com.shop.shop.domain.user.dto.NaverJoinUser;
@@ -36,5 +39,13 @@ public class UserService {
 	
 	public User 로그인(String username, String password) {
 		return userDao.login(username, password);
+	}
+	
+	public CheckoutRespDto 구매회원정보(int id) {
+		return userDao.findById(id);
+	}
+	
+	public List<Integer> 장바구니번호리스트(int id) {
+		return userDao.findForCartList(id);
 	}
 }

@@ -11,6 +11,8 @@
 
 .favor-sidebar {
 	float: left;
+	position: sticky;
+	top: 20%;
 	margin-top: 20px;
 	width: 240px;
 	height: 400px;
@@ -44,4 +46,36 @@
 	margin: 2px;
 	margin-left: 24px;
 	padding-left: 3px;
+}
+
+.favor-item-box {
+	width: 100%;
+	height: auto;
+}
+
+.favor-prd-list {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-row-gap: 10px;
+	grid-column-gap: 3%;
+	grid-auto-rows: minmax(100px, auto);
+}
+
+.favor-link-prod {
+	color: black;
+	text-decoration: none;
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 90%;
+}
+
+.favor-prd-item {
+	list-style: none;
+	text-decoration: none;
+}
+
+.favor-prd-box {
+	position: relative;
+	padding: 20px;
 }

@@ -16,7 +16,6 @@ public class DB {
 			Context envContext = (Context) initContext.lookup("java:/comp/env");
 			DataSource ds = (DataSource) envContext.lookup("jdbc/shopDB");
 			Connection conn = ds.getConnection();
-			System.out.println("DB연결 성공");
 			return conn;
 		} catch (Exception e) {
 			e.printStackTrace();

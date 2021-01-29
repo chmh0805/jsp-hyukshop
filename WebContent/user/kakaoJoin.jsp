@@ -11,7 +11,9 @@
 	}
 %>
 
-
+<div class="mgb20 join-frm-header-title">
+	<span class="join-frm-header-title-span f30-bd-111">추가정보 입력하기</span>
+</div>
 <div class="frame join-frm">
 <article class="card-body" style="max-width: 700px; margin: auto;">
     <!-- 회원가입 form태그 시작 -->
@@ -39,7 +41,7 @@
     	<div class="input-group-prepend">
 		    <span class="input-group-text"> <i class="fa fa-building"></i> </span>
 		</div>
-		<input name="address" id="Addr" class="form-control" placeholder="주소 입력" type="text" readonly required />
+		<input name="address" id="Addr" class="form-control" placeholder="주소 입력" type="text" required onkeypress="return false;" style="caret-color: transparent !important;" />
 		<input type="button" value="주소 검색" onclick="goPopup();" />
 	</div> <!-- form-group end.// -->
     <div class="form-group input-group fg-x700">
@@ -61,7 +63,6 @@
 <script>
 
 function goPopup(){
-	// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(https://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
     var pop = window.open("/shop/user/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes");
 }
 

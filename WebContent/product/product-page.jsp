@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp"%>
-<% int no = 1; %>
+<%	int qnaNo = 1; 
+	int reviewNo = 1;
+%>
 
 <!-- 전체 박스 시작 -->
 <div class="products-detail">
@@ -53,8 +55,8 @@
 			</div>
 			<div class="products-box-detail-price">
 				<!-- 가격 -->
-				<span class="products-box-detail-price-figure">${prodDto.price}</span> <span>
-					원</span>
+				<span class="products-box-detail-price-figure">${prodDto.price}</span>
+				<span>원</span>
 			</div>
 			<div class="products-box-detail-soldCount border-btm-e1e1e1">
 				<!-- 판매량 -->
@@ -77,14 +79,44 @@
 				</div>
 			</div>
 			<div class="products-box-detail-allPrice">
-				<span class="products-box-detail-allPrice-title">상품 금액</span> <span
-					class="products-box-detail-allPrice-figure">${prodDto.price}</span>
+				<span class="products-box-detail-allPrice-title">상품 금액</span>
+				<span class="products-box-detail-allPrice-figure">
+					<fmt:formatNumber value="${prodDto.price}" type="number" />
+				</span>
 			</div>
 			<!-- 버튼 시작 -->
-			<button type="button" class="buy-btn">바로 구매</button>
-			<button type="button" class="cart-btn">
-				<i class="material-icons">add_shopping_cart</i>
-			</button>
+			<c:choose>
+				<c:when test="${sessionScope.principal != null}">
+					<button type="button" class="buy-btn" onclick="location.href='<%=request.getContextPath()%>/user?cmd=directBuy&prodId=${prodDto.prodId}&userId=${sessionScope.principal.id}';">바로 구매</button>
+				</c:when>
+				<c:otherwise>
+					<button type="button" class="buy-btn" onclick="needLogin();">바로 구매</button>
+				</c:otherwise>
+			</c:choose>
+			<!-- 장바구니 버튼 시작 -->
+			<c:choose>
+			<c:when test="${sessionScope.principal != null}">
+				<c:choose>
+					<c:when test="${isCart eq true }">
+						<button type="button" class="cart-btn" onclick="rmvCart(${sessionScope.principal.id}, ${prodDto.prodId});">
+							<i class="material-icons" style="color: red;">shopping_cart</i>
+						</button>
+					</c:when>
+					<c:otherwise>
+						<button type="button" class="cart-btn" onclick="addCart(${sessionScope.principal.id}, ${prodDto.prodId});">
+							<i class="material-icons">shopping_cart</i>
+						</button>
+					</c:otherwise>
+				</c:choose>
+			</c:when>
+			<c:otherwise>
+				<button type="button" class="cart-btn" onclick="needLogin();">
+					<i class="material-icons">shopping_cart</i>
+				</button>
+			</c:otherwise>
+			</c:choose>
+			<!-- 장바구니 버튼 끝 -->
+			<!-- 찜 버튼 시작 -->
 			<c:choose>
 			<c:when test="${sessionScope.principal != null}">
 				<c:choose>
@@ -101,11 +133,12 @@
 				</c:choose>
 			</c:when>
 			<c:otherwise>
-				<button type="button" class="fav-btn" onclick="alert('로그인이 필요합니다.');">
+				<button type="button" class="fav-btn" onclick="needLogin();">
 					<i class="material-icons">favorite_border</i>
 				</button>
 			</c:otherwise>
 			</c:choose>
+			<!-- 찜 버튼 끝 -->
 			<!-- 버튼 끝 -->
 		</div>
 	</div>
@@ -128,6 +161,13 @@
 		<!-- 상품정보/리뷰/Q&A/주문정보 끝 -->
 
 		<!-- 상품 상세 설명 이미지/글 시작 -->
+		<!-- 우측 하단 sticky  -->
+		<div class="detail-sticky-go-to-top-btn-box">
+			<a href="#" class="detail-sticky-go-to-top-btn-a">
+				<img class="detail-sticky-go-to-top-btn-img" src="/shop/images/build/arrowUp.png" />
+			</a>
+		</div>
+		<!-- 우측 하단 sticky 끝 -->
 		<div id="detail-img-text-box">
 			${prodDto.detail}
 		</div>
@@ -136,7 +176,30 @@
 		<!-- 리뷰 시작 -->
 		<div id="detail-review-box">
 			<div class="detail-review-header">
-				리뷰 (0)
+				리뷰 (${countReview})
+				<c:if test="${sessionScope.principal != null}">
+					<a href="<%=request.getContextPath()%>/review?cmd=reviewWrite&prodNo=${prodDto.prodId}" class="detail-qna-header-a" id="detail-qna-write">리뷰작성</a>
+				</c:if>
+				<a class="detail-qna-header-a" href="<%=request.getContextPath()%>/review?cmd=reviewAll&prodNo=${prodDto.prodId}">전체보기</a>
+			</div>
+			<div class="detail-qna-body">
+				<c:if test="${reviewList != null}">
+					<c:forEach var="review" items="${reviewList}">
+						<div class="detail-qna-item">
+							<span class="detail-qna-item-number"><%=reviewNo %></span>
+							<a href="<%=request.getContextPath()%>/review?cmd=openReviewDetail&reviewId=${review.id}" target="_blank">
+							<span class="detail-qna-item-detail">${review.detail}</span>
+							</a>
+							<span class="detail-qna-item-writerName">
+								${fn:substring(review.name, 0, fn:length(review.name)-1)}*
+							</span>
+							<span class="detail-qna-item-createDate">
+								<fmt:formatDate value="${review.createDate}" type="date"/>
+							</span>
+						</div>
+						<%reviewNo += 1;%>
+					</c:forEach>
+				</c:if>
 			</div>
 			
 		</div>
@@ -149,19 +212,40 @@
 				<c:if test="${sessionScope.principal != null}">
 					<a href="<%=request.getContextPath()%>/qna?cmd=qnawrite&prodNo=${prodDto.prodId}" class="detail-qna-header-a" id="detail-qna-write">문의하기</a>
 				</c:if>
-				<a class="detail-qna-header-a" href="#">전체보기</a>
+				<a class="detail-qna-header-a" href="<%=request.getContextPath()%>/qna?cmd=qnaAll&prodNo=${prodDto.prodId}">전체보기</a>
 			</div>
 			<div class="detail-qna-body">
 				<c:if test="${qnaList != null}">
 					<c:forEach var="qna" items="${qnaList}">
 						<div class="detail-qna-item">
-							<span class="detail-qna-item-number"><%=no %></span>
-							<a href="#">
-								<span class="detail-qna-item-detail">${qna.detail}</span>
+							<span class="detail-qna-item-number"><%=qnaNo %></span>
+							<a href="<%=request.getContextPath()%>/qna?cmd=openQnaDetail&qnaId=${qna.id}" target="_blank">
+							<c:choose>
+								<c:when test="${empty qna.password}">
+									<span class="detail-qna-item-detail">${qna.detail}</span>
+								</c:when>
+								<c:otherwise>
+									<span class="detail-qna-item-detail">비밀글입니다.</span>
+								</c:otherwise>
+							</c:choose>
 							</a>
-							<span class="detail-qna-item-createDate">${qna.createDate}</span>
+							<c:choose>
+								<c:when test="${empty qna.password}">
+									<span class="detail-qna-item-writerName">
+										${fn:substring(qna.name, 0, fn:length(qna.name)-1)}*
+									</span>
+								</c:when>
+								<c:otherwise>
+									<span class="detail-qna-item-writerName">
+										
+									</span>
+								</c:otherwise>
+							</c:choose>
+							<span class="detail-qna-item-createDate">
+								<fmt:formatDate value="${qna.createDate}" type="date"/>
+							</span>
 						</div>
-						<%no += 1;%>
+						<%qnaNo += 1;%>
 					</c:forEach>
 				</c:if>
 			</div>
@@ -200,6 +284,7 @@
 
 	</div>
 	<!-- 아래 박스 전체 끝 -->
+
 </div>
 
 <script type="text/javascript" src="/shop/js/product.js"></script>

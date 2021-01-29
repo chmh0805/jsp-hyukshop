@@ -26,10 +26,10 @@ function upload() {
 	}).done(function(result){
 		if (result === '200') {
 			alert('상품등록 성공');
-			history.back();
+			location.href = document.referrer;
 		} else {
 			alert('상품등록 실패');
-			history.back();
+			location.href = document.referrer;
 		}
 	})
 }

@@ -10,5 +10,7 @@ import lombok.Data;
 public class DetailQnaDto {
 	private int id;
 	private String detail;
+	private String password;
+	private int optionNo;
 	private Timestamp createDate;
 }

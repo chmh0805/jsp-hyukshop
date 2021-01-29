@@ -3,8 +3,11 @@ package com.shop.shop.domain.user;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.shop.shop.config.DB;
+import com.shop.shop.domain.user.dto.CheckoutRespDto;
 import com.shop.shop.domain.user.dto.JoinUser;
 import com.shop.shop.domain.user.dto.KakaoJoinUser;
 import com.shop.shop.domain.user.dto.NaverJoinUser;
@@ -12,11 +15,63 @@ import com.shop.shop.domain.user.dto.UpdateUser;
 
 public class UserDao {
 	
-	public User findByUserIdPassword(int userId, String password) {
-		String sql = "SELECT id, username, name, email, phone, address, password FROM user WHERE id = ? AND password = ?";
+	public List<Integer> findForCartList(int id) {
 		Connection conn = DB.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		String sql = "SELECT productId FROM cart WHERE userId = ?";
+		List<Integer> result = new ArrayList<>();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				int prodId = rs.getInt("productId");
+				result.add(prodId);
+			}
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DB.close(conn, pstmt, rs);
+		}
+		return null;
+	}
+	
+	public CheckoutRespDto findById(int id) {
+		Connection conn = DB.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT id, name, email, phone, address FROM user WHERE id = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				CheckoutRespDto result = CheckoutRespDto.builder()
+						.id(rs.getInt("id"))
+						.name(rs.getString("name"))
+						.email(rs.getString("email"))
+						.phone(rs.getString("phone"))
+						.address(rs.getString("address"))
+						.build();
+				return result;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DB.close(conn, pstmt, rs);
+		}
+		return null;
+	}
+	
+	public User findByUserIdPassword(int userId, String password) {
+		Connection conn = DB.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT id, username, name, email, phone, address, password FROM user WHERE id = ? AND password = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);

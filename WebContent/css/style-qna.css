@@ -46,3 +46,43 @@
 	font-weight: 400;
 	text-align: center;
 }
+
+.qnadetail-box {
+	min-height: 500px;
+	height: auto;
+	border: 1px solid #e1e1e1;
+}
+
+.qna-detail-box-header {
+	padding-top: 12px;
+	height: 50px;
+	text-align: left;
+	margin-bottom: 10px;
+}
+
+.qna-detail-box-header-title {
+	margin-left: 2%;
+	margin-right: 1%;
+	font-size: 25px;
+	font-weight: 500;
+}
+
+.qna-detail-box-header-content {
+	font-size: 18px;
+	margin-right: 2%;
+}
+
+.qna-detail-box-body-title {
+	height: 40px;
+	margin-left: 2%;
+	margin-right: 1%;
+	font-size: 25px;
+	font-weight: 500;
+	text-align: left;
+}
+
+.qna-detail-box-body-content {
+	border-top: 1px solid #e1e1e1;
+	margin: 0 4%;
+	padding: 20px;
+}
